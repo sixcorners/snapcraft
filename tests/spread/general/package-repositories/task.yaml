@@ -6,8 +6,9 @@ environment:
   SNAP/test_apt_ppa: test-apt-ppa
 
 systems:
-  - ubuntu-18.04-64
-  - ubuntu-18.04-amd64
+  - ubuntu-16*
+  - ubuntu-18*
+  - ubuntu-20*
 
 prepare: |
   #shellcheck source=tests/spread/tools/snapcraft-yaml.sh
@@ -29,4 +30,4 @@ execute: |
   # Build what we have and verify the snap runs as expected.
   snapcraft
   snap install "${SNAP}"_1.0_*.snap --dangerous
-  [ "$(test-ppa)" = "hello!" ]
+  [ "$(${SNAP}.test-ppa)" = "hello!" ]

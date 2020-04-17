@@ -1,5 +1,5 @@
-name: test-apt-deb
-version: 'test1'
+name: test-apt-keyserver
+version: '1.0'
 summary: test
 description: test
 grade: stable

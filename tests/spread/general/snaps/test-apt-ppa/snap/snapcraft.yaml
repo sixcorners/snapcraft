@@ -1,5 +1,5 @@
 name: test-apt-ppa
-version: 'test1'
+version: '1.0'
 summary: test
 description: test
 grade: stable
