@@ -52,8 +52,8 @@ class PackageRepository(abc.ABC):
             if not isinstance(data, list):
                 raise RuntimeError(f"invalid package-repositories: {data!r}")
 
-            for repo in data:
-                package_repo = cls.unmarshal(repo)
+            for repository in data:
+                package_repo = cls.unmarshal(repository)
                 repositories.append(package_repo)
 
         return repositories
