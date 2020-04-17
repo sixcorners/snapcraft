@@ -20,7 +20,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from snapcraft.internal.repo._deb import Ubuntu
+from snapcraft.internal import repo
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +65,7 @@ class PackageRepositoryAptPpa(PackageRepository):
         self.ppa = ppa
 
     def install(self, *, keys_path: Path) -> bool:
-        return Ubuntu.install_ppa(keys_path=keys_path, ppa=self.ppa)
+        return repo.Ubuntu.install_ppa(keys_path=keys_path, ppa=self.ppa)
 
     def marshal(self) -> Dict[str, Any]:
         data = dict(type="apt")
@@ -118,12 +118,12 @@ class PackageRepositoryAptDeb(PackageRepository):
 
     def install(self, keys_path: Path) -> bool:
         # First install associated GPG key.
-        new_key: bool = Ubuntu.install_gpg_key_id(
+        new_key: bool = repo.Ubuntu.install_gpg_key_id(
             keys_path=keys_path, key_id=self.key_id, key_server=self.key_server
         )
 
         # Now install sources file.
-        new_sources: bool = Ubuntu.install_deb822_sources(
+        new_sources: bool = repo.Ubuntu.install_deb822_sources(
             architectures=self.architectures,
             components=self.components,
             deb_types=self.deb_types,
